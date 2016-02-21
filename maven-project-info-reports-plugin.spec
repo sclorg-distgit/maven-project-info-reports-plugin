@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        2.6
-Release:        8.13%{?dist}
+Release:        8.14%{?dist}
 Summary:        Maven Project Info Reports Plugin
 
 License:        ASL 2.0
@@ -13,36 +13,36 @@ Source0:        http://repo2.maven.org/maven2/org/apache/maven/plugins/%{pkg_nam
 BuildArch: noarch
 
 BuildRequires: %{?scl_prefix_java_common}javapackages-tools
-BuildRequires: maven30-apache-commons-parent
+BuildRequires: %{?scl_prefix}apache-commons-parent
 BuildRequires: %{?scl_prefix_java_common}maven-local
-BuildRequires: maven30-maven-dependency-tree
-BuildRequires: maven30-maven-plugin-annotations
-BuildRequires: maven30-maven-plugin-plugin
-BuildRequires: maven30-maven-reporting-api
-BuildRequires: maven30-maven-reporting-impl
-BuildRequires: maven30-maven-doxia-tools
-BuildRequires: maven30-maven-shared-jar
-BuildRequires: maven30-maven-wagon-file
-BuildRequires: maven30-maven-wagon-http-lightweight
-BuildRequires: maven30-maven-wagon-provider-api
-BuildRequires: maven30-maven-wagon-ssh
-BuildRequires: maven30-maven-scm
-BuildRequires: maven30-maven-doxia-sink-api
-BuildRequires: maven30-maven-doxia-logging-api
-BuildRequires: maven30-maven-doxia-core
-BuildRequires: maven30-maven-doxia-module-xhtml
-BuildRequires: maven30-maven-doxia-sitetools
-BuildRequires: maven30-plexus-containers-container-default
-BuildRequires: maven30-plexus-component-api
-BuildRequires: maven30-plexus-i18n
-BuildRequires: maven30-plexus-utils
-BuildRequires: maven30-apache-commons-validator
-BuildRequires: maven30-maven-plugin-testing-harness
+BuildRequires: %{?scl_prefix}maven-dependency-tree
+BuildRequires: %{?scl_prefix}maven-plugin-annotations
+BuildRequires: %{?scl_prefix}maven-plugin-plugin
+BuildRequires: %{?scl_prefix}maven-reporting-api
+BuildRequires: %{?scl_prefix}maven-reporting-impl
+BuildRequires: %{?scl_prefix}maven-doxia-tools
+BuildRequires: %{?scl_prefix}maven-shared-jar
+BuildRequires: %{?scl_prefix}maven-wagon-file
+BuildRequires: %{?scl_prefix}maven-wagon-http-lightweight
+BuildRequires: %{?scl_prefix}maven-wagon-provider-api
+BuildRequires: %{?scl_prefix}maven-wagon-ssh
+BuildRequires: %{?scl_prefix}maven-scm
+BuildRequires: %{?scl_prefix}maven-doxia-sink-api
+BuildRequires: %{?scl_prefix}maven-doxia-logging-api
+BuildRequires: %{?scl_prefix}maven-doxia-core
+BuildRequires: %{?scl_prefix}maven-doxia-module-xhtml
+BuildRequires: %{?scl_prefix}maven-doxia-sitetools
+BuildRequires: %{?scl_prefix}plexus-containers-container-default
+BuildRequires: %{?scl_prefix}plexus-component-api
+BuildRequires: %{?scl_prefix}plexus-i18n
+BuildRequires: %{?scl_prefix}plexus-utils
+BuildRequires: %{?scl_prefix}apache-commons-validator
+BuildRequires: %{?scl_prefix}maven-plugin-testing-harness
 BuildRequires: %{?scl_prefix_java_common}tomcat-servlet-3.0-api
-BuildRequires: maven30-maven-jarsigner-plugin
-BuildRequires: maven30-keytool-maven-plugin
-BuildRequires: maven30-joda-time
-BuildRequires: maven30-maven-resources-plugin
+BuildRequires: %{?scl_prefix}maven-jarsigner-plugin
+BuildRequires: %{?scl_prefix}keytool-maven-plugin
+BuildRequires: %{?scl_prefix}joda-time
+BuildRequires: %{?scl_prefix}maven-resources-plugin
 
 
 %description
@@ -59,7 +59,7 @@ API documentation for %{pkg_name}.
 
 %prep
 %setup -q -c -n %{pkg_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 pushd %{pkg_name}-%{version}
 # removed cvsjava provider since we don't support it anymore
@@ -69,7 +69,7 @@ popd
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 pushd %{pkg_name}-%{version}
 %mvn_build -f
@@ -77,7 +77,7 @@ popd
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 pushd %{pkg_name}-%{version}
 %mvn_install
@@ -93,6 +93,9 @@ popd
 %doc %{pkg_name}-%{version}/LICENSE %{pkg_name}-%{version}/NOTICE
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 2.6-8.14
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 2.6-8.13
 - maven33 rebuild
 
