@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        2.6
-Release:        8.14%{?dist}
+Release:        8.15%{?dist}
 Summary:        Maven Project Info Reports Plugin
 
 License:        ASL 2.0
@@ -25,7 +25,6 @@ BuildRequires: %{?scl_prefix}maven-shared-jar
 BuildRequires: %{?scl_prefix}maven-wagon-file
 BuildRequires: %{?scl_prefix}maven-wagon-http-lightweight
 BuildRequires: %{?scl_prefix}maven-wagon-provider-api
-BuildRequires: %{?scl_prefix}maven-wagon-ssh
 BuildRequires: %{?scl_prefix}maven-scm
 BuildRequires: %{?scl_prefix}maven-doxia-sink-api
 BuildRequires: %{?scl_prefix}maven-doxia-logging-api
@@ -64,6 +63,9 @@ set -e -x
 pushd %{pkg_name}-%{version}
 # removed cvsjava provider since we don't support it anymore
 %pom_remove_dep :maven-scm-provider-cvsjava
+# not actually needed
+%pom_remove_dep :wagon-ssh
+
 %pom_xpath_remove "pom:dependency[pom:scope[text()='test']]"
 popd
 %{?scl:EOF}
@@ -93,6 +95,9 @@ popd
 %doc %{pkg_name}-%{version}/LICENSE %{pkg_name}-%{version}/NOTICE
 
 %changelog
+* Mon Jan 18 2016 Michal Srb <msrb@redhat.com> - 2.6-8.15
+- Drop wagon-ssh dependency
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 2.6-8.14
 - maven33 rebuild #2
 
