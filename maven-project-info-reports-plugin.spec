@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        2.6
-Release:        8.15%{?dist}
+Release:        8.16%{?dist}
 Summary:        Maven Project Info Reports Plugin
 
 License:        ASL 2.0
@@ -14,7 +14,7 @@ BuildArch: noarch
 
 BuildRequires: %{?scl_prefix_java_common}javapackages-tools
 BuildRequires: %{?scl_prefix}apache-commons-parent
-BuildRequires: %{?scl_prefix_java_common}maven-local
+BuildRequires: %{?scl_prefix}maven-local
 BuildRequires: %{?scl_prefix}maven-dependency-tree
 BuildRequires: %{?scl_prefix}maven-plugin-annotations
 BuildRequires: %{?scl_prefix}maven-plugin-plugin
@@ -95,6 +95,9 @@ popd
 %doc %{pkg_name}-%{version}/LICENSE %{pkg_name}-%{version}/NOTICE
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 2.6-8.16
+- Fix BR on maven-local & co.
+
 * Mon Jan 18 2016 Michal Srb <msrb@redhat.com> - 2.6-8.15
 - Drop wagon-ssh dependency
 
